@@ -11,12 +11,11 @@ const {
   saveRefreshTokenIntoDB,
   getRefreshTokenFromDB,
 } = require("./services/Events");
-const port = 3000;
 
 const INITIAL_ACCESS_TOKEN = process.env.INITIAL_ACCESS_TOKEN || "";
 const CLIENT_ID = process.env.CLIENT_ID || "";
 const CLIENT_SECRET = process.env.CLIENT_SECRET || "";
-
+const PORT = process.env.PORT || 3000;
 const cache = new NodeCache();
 
 const setupAxiosInterceptors = () => {
@@ -66,7 +65,7 @@ app.get("/", (req, res) => {
   res.send("Hello! This is the Strava to get your bike waxed!");
 });
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   app._router.stack.forEach(function (r) {
     if (r.route && r.route.path) {
       console.log(r.route.stack[0].method.toUpperCase(), r.route.path);
@@ -75,5 +74,5 @@ app.listen(port, () => {
   });
   // cache.set("refresh_token", INITIAL_REFRESH_TOKEN);
   cache.set("access_token", INITIAL_ACCESS_TOKEN);
-  console.log(`App listening at http://localhost:${port}`);
+  console.log(`App listening at http://localhost:${PORT}`);
 });
