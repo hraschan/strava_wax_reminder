@@ -4,6 +4,7 @@ require("dotenv").config();
 const NodeCache = require("node-cache");
 var bodyParser = require("body-parser");
 const app = express();
+const https = require("https");
 const eventsRouter = require("./routes/events");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -15,7 +16,7 @@ const {
 const INITIAL_ACCESS_TOKEN = process.env.INITIAL_ACCESS_TOKEN || "";
 const CLIENT_ID = process.env.CLIENT_ID || "";
 const CLIENT_SECRET = process.env.CLIENT_SECRET || "";
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.PORT) || 3000;
 const cache = new NodeCache();
 
 const setupAxiosInterceptors = () => {
@@ -65,7 +66,7 @@ app.get("/", (req, res) => {
   res.send("Hello! This is the Strava to get your bike waxed!");
 });
 
-app.listen(PORT, () => {
+https.createServer({}, app).listen(PORT, () => {
   app._router.stack.forEach(function (r) {
     if (r.route && r.route.path) {
       console.log(r.route.stack[0].method.toUpperCase(), r.route.path);
@@ -76,3 +77,14 @@ app.listen(PORT, () => {
   cache.set("access_token", INITIAL_ACCESS_TOKEN);
   console.log(`App listening at http://localhost:${PORT}`);
 });
+// app.listen(PORT, () => {
+//   app._router.stack.forEach(function (r) {
+//     if (r.route && r.route.path) {
+//       console.log(r.route.stack[0].method.toUpperCase(), r.route.path);
+//       //   console.log(r.route.methode, r.route.path);
+//     }
+//   });
+//   // cache.set("refresh_token", INITIAL_REFRESH_TOKEN);
+//   cache.set("access_token", INITIAL_ACCESS_TOKEN);
+//   console.log(`App listening at http://localhost:${PORT}`);
+// });
