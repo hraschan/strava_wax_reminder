@@ -62,6 +62,10 @@ setupAxiosInterceptors();
 
 app.use("/events", eventsRouter);
 
+app.get("/", (req, res) => {
+  res.send("Hello! This is the Strava to get your bike waxed!");
+});
+
 app.listen(port, () => {
   app._router.stack.forEach(function (r) {
     if (r.route && r.route.path) {
