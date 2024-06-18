@@ -49,8 +49,11 @@ const checkIfGearNeedsWaxing = async () => {
       transporter.sendMail(mailOptions, function (err, info) {
         if (err) {
           console.error(err);
-          logger.log("error", "Error sending email:", JSON.stringify(err));
-        } else console.log(info);
+          logger.error("Error sending email:", JSON.stringify(err));
+        } else {
+          console.log("Email sent: " + info.response);
+          logger.log("info", "Email sent:", info.response);
+        }
       });
     }
     // Send email
@@ -62,7 +65,7 @@ const checkIfGearNeedsWaxing = async () => {
     logger.log("info", responseMessage);
     console.log(responseMessage);
   } catch (error) {
-    logger.log("error", "Error making API request:", JSON.stringify(error));
+    logger.error("Error making API request:", JSON.stringify(error));
     console.error("Error making API request:", error);
   }
 };

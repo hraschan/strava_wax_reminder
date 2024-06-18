@@ -55,7 +55,7 @@ const setupAxiosInterceptors = () => {
 
           return axios(originalRequest);
         } catch (error) {
-          logger.log("info", "Error refreshing token:", JSON.stringify(error));
+          logger.error("Error refreshing token:", JSON.stringify(error));
           console.error("Error refreshing token:", error);
         }
       }
@@ -83,7 +83,7 @@ app.listen(PORT, () => {
   //   }
   // });
   // cache.set("refresh_token", INITIAL_REFRESH_TOKEN);
-  logger.log("info", `App listening on port ${PORT}!`);
+  logger.info(`App listening on port ${PORT}!`);
   cache.set("access_token", INITIAL_ACCESS_TOKEN);
   // console.log(`App listening at http://localhost:${PORT}`);
 });

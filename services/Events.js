@@ -9,11 +9,7 @@ const saveRefreshTokenIntoDB = async (refreshToken) => {
       [refreshToken, MY_STRAVA_ID]
     );
   } catch (error) {
-    logger.log(
-      "error",
-      "Error saving refresh token into DB:",
-      JSON.stringify(error)
-    );
+    logger.error("Error saving refresh token into DB:", JSON.stringify(error));
     console.error("Error saving refresh token into DB:", error);
   }
 
@@ -28,11 +24,7 @@ const getRefreshTokenFromDB = async () => {
     );
     return result[0].refresh_token;
   } catch (error) {
-    logger.log(
-      "error",
-      "Error getting refresh token from DB:",
-      JSON.stringify(error)
-    );
+    logger.error("Error getting refresh token from DB:", JSON.stringify(error));
     console.error("Error getting refresh token from DB:", error);
   }
 };
@@ -45,11 +37,7 @@ const getLastWaxedFromDB = async () => {
     );
     return result[0].last_time_waxed;
   } catch (error) {
-    logger.log(
-      "error",
-      "Error getting last waxed from DB:",
-      JSON.stringify(error)
-    );
+    logger.error("Error getting last waxed from DB:", JSON.stringify(error));
     console.error("Error getting last waxed from DB:", error);
   }
 };
