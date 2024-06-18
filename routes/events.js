@@ -32,8 +32,9 @@ const checkIfGearNeedsWaxing = async () => {
 
     const lastWaxed = await getLastWaxedFromDB();
     console.log("Last waxed:", lastWaxed);
-    logger.info("Last waxed:", lastWaxed);
-    logger.info("Current distance:", response.data.converted_distance);
+    logger.info("Last waxed: " + lastWaxed);
+    logger.info("Current distance:" + response.data.converted_distance);
+    logger.info("Next waxing:" + calculateNextWaxing(lastWaxed));
 
     const needsWaxing = isTimeToWax(
       lastWaxed,
