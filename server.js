@@ -66,25 +66,14 @@ app.get("/", (req, res) => {
   res.send("Hello! This is the Strava to get your bike waxed!");
 });
 
-// https.createServer({}, app).listen(PORT, () => {
-//   app._router.stack.forEach(function (r) {
-//     if (r.route && r.route.path) {
-//       console.log(r.route.stack[0].method.toUpperCase(), r.route.path);
-//       //   console.log(r.route.methode, r.route.path);
-//     }
-//   });
-//   // cache.set("refresh_token", INITIAL_REFRESH_TOKEN);
-//   cache.set("access_token", INITIAL_ACCESS_TOKEN);
-//   console.log(`App listening at http://localhost:${PORT}`);
-// });
 app.listen(PORT, () => {
-  app._router.stack.forEach(function (r) {
-    if (r.route && r.route.path) {
-      console.log(r.route.stack[0].method.toUpperCase(), r.route.path);
-      //   console.log(r.route.methode, r.route.path);
-    }
-  });
+  // app._router.stack.forEach(function (r) {
+  //   if (r.route && r.route.path) {
+  //     console.log(r.route.stack[0].method.toUpperCase(), r.route.path);
+  //     //   console.log(r.route.methode, r.route.path);
+  //   }
+  // });
   // cache.set("refresh_token", INITIAL_REFRESH_TOKEN);
   cache.set("access_token", INITIAL_ACCESS_TOKEN);
-  console.log(`App listening at http://localhost:${PORT}`);
+  // console.log(`App listening at http://localhost:${PORT}`);
 });
