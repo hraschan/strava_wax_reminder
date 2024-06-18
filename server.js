@@ -18,7 +18,7 @@ const CLIENT_ID = process.env.CLIENT_ID || "";
 const CLIENT_SECRET = process.env.CLIENT_SECRET || "";
 const PORT = parseInt(process.env.PORT) || 3000;
 const cache = new NodeCache();
-
+const APP_VERSION = process.env.APP_VERSION || "1.0.0";
 const setupAxiosInterceptors = () => {
   axios.interceptors.response.use(
     (response) => response,
@@ -63,7 +63,10 @@ setupAxiosInterceptors();
 app.use("/events", eventsRouter);
 
 app.get("/", (req, res) => {
-  res.send("Hello! This is the Strava to get your bike waxed!");
+  res.send(
+    "Hello! This is the Strava to get your bike waxed! 🚴‍♂️ - Version: " +
+      APP_VERSION
+  );
 });
 
 app.listen(PORT, () => {
