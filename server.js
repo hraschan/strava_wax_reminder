@@ -83,7 +83,7 @@ app.listen(PORT, () => {
   //   }
   // });
   // cache.set("refresh_token", INITIAL_REFRESH_TOKEN);
-  logger.log("info", `App listening on port ${port}!`);
+  logger.log("info", `App listening on port ${PORT}!`);
   cache.set("access_token", INITIAL_ACCESS_TOKEN);
   // console.log(`App listening at http://localhost:${PORT}`);
 });
