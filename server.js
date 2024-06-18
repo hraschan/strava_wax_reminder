@@ -4,8 +4,9 @@ require("dotenv").config();
 const NodeCache = require("node-cache");
 var bodyParser = require("body-parser");
 const app = express();
-const https = require("https");
 const eventsRouter = require("./routes/events");
+const logger = require("./logger");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const {
@@ -27,6 +28,8 @@ const setupAxiosInterceptors = () => {
 
       if (error.response.status === 401 && !originalRequest._retry) {
         console.log("Refreshing token");
+        logger.log("info", "Refreshing token");
+
         originalRequest._retry = true;
 
         const url = "https://www.strava.com/oauth/token";
@@ -48,8 +51,11 @@ const setupAxiosInterceptors = () => {
             "Authorization"
           ] = `Bearer ${response.data.access_token}`;
           console.log("Token refreshed");
+          logger.log("info", "Token refreshed");
+
           return axios(originalRequest);
         } catch (error) {
+          logger.log("info", "Error refreshing token:", JSON.stringify(error));
           console.error("Error refreshing token:", error);
         }
       }
@@ -77,6 +83,7 @@ app.listen(PORT, () => {
   //   }
   // });
   // cache.set("refresh_token", INITIAL_REFRESH_TOKEN);
+  logger.log("info", `App listening on port ${port}!`);
   cache.set("access_token", INITIAL_ACCESS_TOKEN);
   // console.log(`App listening at http://localhost:${PORT}`);
 });

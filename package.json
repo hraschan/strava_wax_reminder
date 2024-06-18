@@ -6,7 +6,8 @@
     "express": "^4.19.2",
     "mysql2": "^3.10.1",
     "node-cache": "^5.1.2",
-    "nodemailer": "^6.9.13"
+    "nodemailer": "^6.9.13",
+    "winston": "^3.13.0"
   },
   "scripts": {
     "start:dev": "nodemon ./server.js"

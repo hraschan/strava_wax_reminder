@@ -4,7 +4,7 @@ const cache = new NodeCache();
 const axios = require("axios");
 const { getLastWaxedFromDB } = require("../services/Events");
 const transporter = require("../nodemailer");
-
+const logger = require("../logger");
 const GEAR_ID = process.env.GEAR_ID || "";
 const MY_STRAVA_ID = process.env.MY_STRAVA_ID || "";
 
@@ -47,8 +47,10 @@ const checkIfGearNeedsWaxing = async () => {
       };
 
       transporter.sendMail(mailOptions, function (err, info) {
-        if (err) console.log(err);
-        else console.log(info);
+        if (err) {
+          console.error(err);
+          logger.log("error", "Error sending email:", JSON.stringify(err));
+        } else console.log(info);
       });
     }
     // Send email
@@ -57,8 +59,10 @@ const checkIfGearNeedsWaxing = async () => {
       ? "It's time to wax your bike"
       : "No need to wax your bike yet";
 
+    logger.log("info", responseMessage);
     console.log(responseMessage);
   } catch (error) {
+    logger.log("error", "Error making API request:", JSON.stringify(error));
     console.error("Error making API request:", error);
   }
 };
