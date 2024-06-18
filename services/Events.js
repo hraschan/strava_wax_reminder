@@ -12,8 +12,6 @@ const saveRefreshTokenIntoDB = async (refreshToken) => {
     logger.error("Error saving refresh token into DB:", JSON.stringify(error));
     console.error("Error saving refresh token into DB:", error);
   }
-
-  console.log(result);
 };
 
 const getRefreshTokenFromDB = async () => {
