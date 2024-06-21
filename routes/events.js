@@ -80,7 +80,9 @@ router.post("/", async (req, res) => {
     req.body.owner_id === parseInt(MY_STRAVA_ID)
   ) {
     console.log("Activity event received");
-    await checkIfGearNeedsWaxing();
+    setTimeout(() => {
+      checkIfGearNeedsWaxing();
+    }, 30000);
   }
   res.sendStatus(200);
 });
