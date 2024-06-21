@@ -7,7 +7,7 @@ const transporter = require("../nodemailer");
 const logger = require("../logger");
 const GEAR_ID = process.env.GEAR_ID || "";
 const MY_STRAVA_ID = process.env.MY_STRAVA_ID || "";
-const DELAY = 1000 * 60 * 5; // 3 minutes
+const DELAY = 1000 * 60 * 5; // 5 minutes
 const WAXING_INTERVAL = parseInt(process.env.WAXING_INTERVAL) || 300; // All 300 KMs
 const calculateNextWaxing = (lastWaxed) => {
   return lastWaxed + WAXING_INTERVAL;
@@ -81,7 +81,7 @@ router.post("/", async (req, res) => {
   ) {
     console.log("Activity event received");
     setTimeout(() => {
-      logger.info("Checking if gear needs waxing.... delayed by  3 minutes");
+      logger.info("Checking if gear needs waxing.... delayed by  5 minutes");
       checkIfGearNeedsWaxing();
     }, DELAY);
   }

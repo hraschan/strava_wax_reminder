@@ -40,8 +40,21 @@ const getLastWaxedFromDB = async () => {
   }
 };
 
+const updateLastWaxedInDB = async (lastWaxed) => {
+  try {
+    const [result] = await pool.query(
+      "UPDATE auth SET last_time_waxed = ? WHERE strava_id = ?",
+      [lastWaxed, MY_STRAVA_ID]
+    );
+  } catch (error) {
+    logger.error("Error updating last waxed in DB: " + JSON.stringify(error));
+    console.error("Error updating last waxed in DB:" + error);
+  }
+};
+
 module.exports = {
   saveRefreshTokenIntoDB,
   getRefreshTokenFromDB,
   getLastWaxedFromDB,
+  updateLastWaxedInDB,
 };

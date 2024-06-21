@@ -5,8 +5,12 @@ const NodeCache = require("node-cache");
 var bodyParser = require("body-parser");
 const app = express();
 const eventsRouter = require("./routes/events");
+const stravaRouter = require("./routes/strava");
 const logger = require("./logger");
-
+const { join } = require("path");
+const path = require("path");
+const cors = require("cors");
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const {
@@ -67,13 +71,19 @@ const setupAxiosInterceptors = () => {
 setupAxiosInterceptors();
 
 app.use("/events", eventsRouter);
+app.use("/api/strava", stravaRouter);
 
-app.get("/", (req, res) => {
-  res.send(
-    "Hello! This is the Strava to get your bike waxed! 🚴‍♂️ - Version: " +
-      APP_VERSION
-  );
+// app.get("/", (req, res) => {
+//   res.sendFile(join(__dirname, "./client/strava-wax/dist/index.html"));
+// });
+
+app.use(express.static(path.join(__dirname, "client/strava-wax/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/strava-wax/dist/index.html"));
 });
+// app.use(function (req, res) {
+//   res.sendFile(join(__dirname, "/client/strava-wax/dist/index.html"));
+// });
 
 app.listen(PORT, () => {
   // app._router.stack.forEach(function (r) {
