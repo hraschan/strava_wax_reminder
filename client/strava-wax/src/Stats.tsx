@@ -11,7 +11,9 @@ type Stats = {
 };
 
 async function fetchData() {
-  const response = await axios.get("http://localhost:4000/api/strava/stats");
+  const response = await axios.get(
+    "https://strava-wax.mhraschan.com/api/strava/stats"
+  );
   if (!response) {
     console.error("Network response was not ok");
     throw new Error("Network response was not ok");
@@ -20,7 +22,9 @@ async function fetchData() {
 }
 
 async function patchWaxChain() {
-  const response = await axios.patch("http://localhost:4000/api/strava");
+  const response = await axios.patch(
+    "https://strava-wax.mhraschan.com/api/strava"
+  );
   if (!response) {
     console.error("Network response was not ok");
     throw new Error("Network response was not ok");
