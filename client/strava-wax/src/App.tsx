@@ -10,6 +10,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <>
         <div>
+          <h1 className="strava">Strava Wax Reminder - Canyon CF7 </h1>
           <Stats />
         </div>
       </>

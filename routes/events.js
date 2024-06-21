@@ -46,7 +46,7 @@ const checkIfGearNeedsWaxing = async () => {
         from: "Strava <maximilian.hraschan@gmail.com>",
         to: "maximilian.hraschan@gmail.com",
         subject: "Dein Canyon CF7 braucht Wachs!",
-        html: "<b><h1>Hey there!</h1> </b> <br>Dein Canyon CF7 muss wieder mit Wachs versorgt werden. Hier kannst du bestätigen, dass du das Rad auf Vordermann gebracht hast: <a href='https://strava.mhraschan.com'>Wieder fahrbereit</a><br/>",
+        html: "<b><h1>Hey there!</h1> </b> <br>Dein Canyon CF7 muss wieder mit Wachs versorgt werden. Hier kannst du bestätigen, dass du das Rad auf Vordermann gebracht hast: <a href='https://strava-wax.mhraschan.com'>Wieder fahrbereit</a><br/>",
       };
 
       transporter.sendMail(mailOptions, function (err, info) {

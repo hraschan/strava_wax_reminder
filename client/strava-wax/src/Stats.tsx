@@ -41,7 +41,7 @@ export const Stats: FC = () => {
   if (isLoading || isLoadingUpdate) {
     return (
       <div>
-        <FallingLines color="#fc5400" width="40" visible={true} />
+        <FallingLines color="#fc5400" width="100" visible={true} />
       </div>
     );
   }
@@ -56,9 +56,6 @@ export const Stats: FC = () => {
 
   return (
     <div>
-      <h1 className="strava">Strava Wax Reminder - Canyon CF7 </h1>
-      <br />
-      <br />
       {data.needsWaxingIn <= 0 ? (
         <div>
           <p>Waxing is due now!</p>
