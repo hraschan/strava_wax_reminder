@@ -73,27 +73,12 @@ setupAxiosInterceptors();
 app.use("/events", eventsRouter);
 app.use("/api/strava", stravaRouter);
 
-// app.get("/", (req, res) => {
-//   res.sendFile(join(__dirname, "./client/strava-wax/dist/index.html"));
-// });
-
 app.use(express.static(path.join(__dirname, "client/strava-wax/dist")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/strava-wax/dist/index.html"));
 });
-// app.use(function (req, res) {
-//   res.sendFile(join(__dirname, "/client/strava-wax/dist/index.html"));
-// });
 
 app.listen(PORT, () => {
-  // app._router.stack.forEach(function (r) {
-  //   if (r.route && r.route.path) {
-  //     console.log(r.route.stack[0].method.toUpperCase(), r.route.path);
-  //     //   console.log(r.route.methode, r.route.path);
-  //   }
-  // });
-  // cache.set("refresh_token", INITIAL_REFRESH_TOKEN);
   logger.info(`App listening on port ${PORT}!`);
   cache.set("access_token", INITIAL_ACCESS_TOKEN);
-  // console.log(`App listening at http://localhost:${PORT}`);
 });
