@@ -74,13 +74,14 @@ const checkIfGearNeedsWaxing = async () => {
 };
 
 router.post("/", async (req, res) => {
-  console.log("POST EVENTS", req.body.owner_id, MY_STRAVA_ID);
+  logger.info("REACT TO EVENT", req.body.owner_id, MY_STRAVA_ID);
   if (
     req.body.object_type === "activity" &&
     req.body.owner_id === parseInt(MY_STRAVA_ID)
   ) {
     console.log("Activity event received");
     setTimeout(() => {
+      logger.info("Checking if gear needs waxing.... delayed by  3 minutes");
       checkIfGearNeedsWaxing();
     }, DELAY);
   }
